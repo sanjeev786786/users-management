@@ -1,0 +1,134 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+     	  
+	  <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+				    <?php 
+					if($this->session->flashdata('msg')!='')
+					{ 
+					?>
+					  <div class="alert alert-success alert-dismissable" id="mydiv" style="margin-top:5px;">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<h4>	<i class="icon fa fa-check"></i><?php echo $this->session->flashdata('msg') ?></h4>
+					   
+					  </div>
+				<?php } ?>	
+                    <h1 class="page-header">Image Upload</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Upload Image
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+								
+								<!--------image---------------->
+                                    
+
+<?php if($error) :?>
+    <ul><li><strong>Error uploading an Image!</strong></li><li><?php echo $error ;?></li></ul>
+<?php endif ;?>
+
+<?php if($large_photo_exists && $thumb_photo_exists) :?>
+	<?php echo $large_photo_exists."&nbsp;".$thumb_photo_exists; ?>
+	<p style="    margin-top: 15px;
+    margin-left: 8px;"><a href="<?php echo base_url(); ?>imageuploda">Add another</a></p>
+
+<?php elseif($large_photo_exists && $thumb_photo_exists == NULL) :?>
+
+<h2>Generate Thumbnail</h2>
+<div align="center">
+        <img src="<?php echo base_url() . $upload_path.$img['file_name'];?>" style="float: left; margin-right: 10px;" id="thumbnail" alt="Create Thumbnail" />
+        <div style="border:1px #e5e5e5 solid; float:left; position:relative; overflow:hidden; width:<?php echo $thumb_width;?>px; height:<?php echo $thumb_height;?>px;">
+                <img src="<?php echo base_url() . $upload_path.$img['file_name'];?>" style="position: relative;" alt="Thumbnail Preview" />
+        </div>
+        <br style="clear:both;"/>
+        <form name="thumbnail" action="<?php echo base_url(); ?>imageuploda" method="post">
+                <input type="hidden" name="x1" value="" id="x1" />
+                <input type="hidden" name="y1" value="" id="y1" />
+                <input type="hidden" name="x2" value="" id="x2" />
+                <input type="hidden" name="y2" value="" id="y2" />
+                <input type="hidden" name="file_name" value="<?php echo $img['file_name'] ;?>" />
+                <input type="submit" name="upload_thumbnail" class="btn-primary" value="Save Thumbnail" id="save_thumb" />
+        </form>
+</div>
+
+<hr />
+<?php 	else : ?>
+
+
+<form name="photo" enctype="multipart/form-data" action="<?php echo base_url(); ?>imageuploda" method="post">
+<input type="file" name="image" size="30"/> 
+<input type="submit" name="upload" class="btn-primary" value="crop" style="
+    margin-top: 7px;" />
+</form>
+<?php 	endif ?>
+                                <!--------endimage---------------->
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+		
+		
+    
+    <?php if($large_photo_exists && $thumb_photo_exists == NULL):?>
+    
+    <script type="text/javascript">
+    // <![CDATA[
+        var thumb_width    = <?php echo $thumb_width ;?> ;
+        var thumb_height   = <?php echo $thumb_height ;?> ;
+        var image_width    = <?php echo $img['image_width'] ;?> ;
+        var image_height   = <?php echo $img['image_height'] ;?> ;
+    // ]]>
+    </script>
+    <?php endif ;?>
+    
+    <style type="text/css">
+    
+.btn-primary { 
+	text-shadow: 0px -1px 0px rgba(0,0,0,.5);
+	color: #ffffff;
+	background-color: #263849; 
+	background-image: -moz-linear-gradient(top, #3C4C5B, #263849); 
+	background-image: -ms-linear-gradient(top, #3C4C5B, #263849); 
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3C4C5B), to(#263849)); 
+	background-image: -webkit-linear-gradient(top, #3C4C5B, #263849); 
+	background-image: -o-linear-gradient(top, #3C4C5B, #263849); 
+	background-image: linear-gradient(top, #3C4C5B, #263849); 
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3C4C5B', endColorstr='#263849', GradientType=0); 
+	border-color: #684682 #263849 #263849 #684682; 
+	border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); 
+}
+    
+    </style>
+		
+		

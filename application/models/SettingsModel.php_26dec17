@@ -1,0 +1,57 @@
+<?php
+ob_start();
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class SettingsModel extends CI_Model {
+    public  function __construct() {
+		parent::__construct();
+	}
+
+		
+    public function updatettings(){
+		    
+		    $optionsRadios3 = $this->input->POST('optionsRadios3');
+			$optionsRadios1 = $this->input->POST('optionsRadios1');
+			$optionsRadios2 = $this->input->POST('optionsRadios2');
+			$MINIMAL_BIRTHDAY_DAY = $this->input->POST('MINIMAL_BIRTHDAY_DAY');
+			$MINIMAL_PASSWORD_LENGTH = $this->input->POST('MINIMAL_PASSWORD_LENGTH');
+		    $data = array(
+
+            array(
+                'key' => 'CUSTOMER_ADDRESS_REQUEST' ,
+                'value' => $optionsRadios3
+                ),
+            array(
+                'key' => 'USER_ADDRESS_REQUEST',
+                'value' => $optionsRadios1
+                ),
+            array(
+                'key' => 'ADMIN_ADDRESS_REQUEST',
+                'value' => $optionsRadios2
+                ),
+            array(
+                'key' => 'MINIMAL_BIRTHDAY_DAY',
+                'value' => $MINIMAL_BIRTHDAY_DAY
+                ),
+            array(
+                'key' => 'MINIMAL_PASSWORD_LENGTH' ,
+                'value' => $MINIMAL_PASSWORD_LENGTH
+                ),
+           
+              
+        );
+
+		$result=$this->db->update_batch('settings', $data, 'key'); 
+		//echo $this->db->last_query();exit;
+		  if($result)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+					    
+    }
+}
+	
